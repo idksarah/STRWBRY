@@ -1,0 +1,7 @@
+#info {
+    z-index:9999;
+    position: absolute;
+    width: 100px;
+    height: 150px;
+    background-color: rgb(178, 209, 178);;
+}

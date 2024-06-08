@@ -14,6 +14,15 @@
         }
 */
 
+function positionPopup(event, info) {
+    // Get mouse coordinates
+    const mouseX = event.pageX;
+    const mouseY = event.pageY;
+
+    // Position the popup above the mouse cursor
+    info.style.left = `${mouseX}px`;
+    info.style.top = `${mouseY - 30}px`; // Adjust as necessary to position above the cursor
+}
 
 function getSelectedText() {
     let text = "";
@@ -25,15 +34,29 @@ function getSelectedText() {
     return text;
 }
 
-function afterSelection() {
+function afterSelection(event) {
     let selectedText = getSelectedText();
     selectedText = selectedText.toLowerCase();
-    alert(selectedText);
-    //f(selectedText) //matches an actual word
+
+    let info = document.getElementById("info");
+    if (!info) {
+        // Create the popup element if it doesn't exist
+        info = document.createElement("div");
+        info.id = "info";
+        document.body.appendChild(info);
+    }
+
+    if (selectedText === "highlighted") {
+        info.textContent = "pick out an emphasize"; // Message for the popup
+        positionPopup(event, info);
+        info.style.display = "block";
+    } else {
+        info.style.display = "none";
+    }
 }
 
 //alert("??!");
 document.onmouseup = afterSelection;
 document.onkeyup = afterSelection;
 
-//wsl2
+//ubuntu!!
