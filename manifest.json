@@ -1,0 +1,12 @@
+{
+    "name": "Pronunciation and Definition",
+    "version": "1.0.0",
+    "description": "Provides the pronunciation and definition of highlighted words",
+    "manifest_version": 3,
+    "author": "Sarah Ngai",
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "Read me!",
+        "default_icon": "toro.jpg"
+    }
+}
