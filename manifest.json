@@ -14,7 +14,7 @@
     ],
     "action":{
         "default_popup": "index.html",
-        "default_title": "Read me!",
+        "default_title": "Reader",
         "default_icon": "toro.jpg"
     }
 }

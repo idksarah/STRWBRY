@@ -39,6 +39,7 @@ async function afterSelection(event) {
     const definitions = await fetchDefinition(selectedText);
     console.log('Definitions:', definitions); 
     displayDefinitions(definitions);
+    playTextToSpeech(selectedText);
 }
 
 document.addEventListener('mouseup', afterSelection);
@@ -52,6 +53,11 @@ function getSelectedText() {
         text = document.selection.createRange().text;
     }
     return text;
+}
+
+function playTextToSpeech(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    speechSynthesis.speak(utterance);
 }
 
 //ubuntu
