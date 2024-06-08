@@ -4,7 +4,6 @@ async function fetchDefinition(word) {
 
     try {
         const response = await fetch(apiUrl);
-
         if (!response.ok) {
             return;
         }
@@ -18,7 +17,6 @@ async function fetchDefinition(word) {
 
 function displayDefinitions(definitions) {
     if (!definitions || definitions.length === 0) {
-        alert('No definitions found');
         return;
     }
 
@@ -28,7 +26,6 @@ function displayDefinitions(definitions) {
             definitionText += `${index + 1}. ${definition.shortdef[0]}\n`;
         }
     });
-
     alert(definitionText);
 }
 
@@ -39,10 +36,8 @@ async function afterSelection(event) {
     }
 
     console.log('Selected Text:', selectedText);
-
     const definitions = await fetchDefinition(selectedText);
     console.log('Definitions:', definitions); 
-
     displayDefinitions(definitions);
 }
 
@@ -58,3 +53,5 @@ function getSelectedText() {
     }
     return text;
 }
+
+//ubuntu
