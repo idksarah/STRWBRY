@@ -2,8 +2,16 @@
     "name": "Pronunciation and Definition",
     "version": "1.0.0",
     "description": "Provides the pronunciation and definition of highlighted words",
+    "permissions":[
+        "activeTab"
+    ],
     "manifest_version": 3,
-    "author": "Sarah Ngai",
+    "content_scripts":[
+        {
+            "matches":["<all_urls>"],
+            "js": ["script.js"]
+        }
+    ],
     "action":{
         "default_popup": "index.html",
         "default_title": "Read me!",
