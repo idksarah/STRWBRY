@@ -1,62 +1,60 @@
-/* 
-    detect click
-    check for highlighted text**
-    convert text to lowercase
-    let highlighted = yk, the highlighted text
-    reference dictionary to look for matching terms
-        convert dictionary term to lowercase
-        if var == dictionary term {
-            display text
-            remove text when mouse moves away
-            play audio file **
-        } else {
-         return;
+async function fetchDefinition(word) {
+    const apiKey = 'e9cf6d9e-d14f-4994-b21c-31ac82894fc5';
+    const apiUrl = `https://www.dictionaryapi.com/api/v3/references/spanish/json/${word.toLowerCase()}?key=${apiKey}`;
+
+    try {
+        const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+            return;
         }
-*/
 
-function positionPopup(event, info) {
-    // Get mouse coordinates
-    const mouseX = event.pageX;
-    const mouseY = event.pageY;
-
-    // Position the popup above the mouse cursor
-    info.style.left = `${mouseX}px`;
-    info.style.top = `${mouseY - 30}px`; // Adjust as necessary to position above the cursor
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        return null;
+    }
 }
+
+function displayDefinitions(definitions) {
+    if (!definitions || definitions.length === 0) {
+        alert('No definitions found');
+        return;
+    }
+
+    let definitionText = 'Definitions:\n';
+    definitions.forEach((definition, index) => {
+        if (definition.shortdef && definition.shortdef.length > 0) {
+            definitionText += `${index + 1}. ${definition.shortdef[0]}\n`;
+        }
+    });
+
+    alert(definitionText);
+}
+
+async function afterSelection(event) {
+    let selectedText = getSelectedText().trim().toLowerCase();
+    if (selectedText.length === 0) {
+        return;
+    }
+
+    console.log('Selected Text:', selectedText);
+
+    const definitions = await fetchDefinition(selectedText);
+    console.log('Definitions:', definitions); 
+
+    displayDefinitions(definitions);
+}
+
+document.addEventListener('mouseup', afterSelection);
+document.addEventListener('keyup', afterSelection);
 
 function getSelectedText() {
     let text = "";
-    if(typeof window.getSelection != "undefined"){
+    if (typeof window.getSelection != "undefined") {
         text = window.getSelection().toString();
-    }else if (typeof document.selection != "undefined" && document.selection.type == "Text"){
+    } else if (typeof document.selection != "undefined" && document.selection.type == "Text") {
         text = document.selection.createRange().text;
     }
     return text;
 }
-
-function afterSelection(event) {
-    let selectedText = getSelectedText();
-    selectedText = selectedText.toLowerCase();
-
-    let info = document.getElementById("info");
-    if (!info) {
-        // Create the popup element if it doesn't exist
-        info = document.createElement("div");
-        info.id = "info";
-        document.body.appendChild(info);
-    }
-
-    if (selectedText === "highlighted") {
-        info.textContent = "pick out an emphasize"; // Message for the popup
-        positionPopup(event, info);
-        info.style.display = "block";
-    } else {
-        info.style.display = "none";
-    }
-}
-
-//alert("??!");
-document.onmouseup = afterSelection;
-document.onkeyup = afterSelection;
-
-//ubuntu!!
