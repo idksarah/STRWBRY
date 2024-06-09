@@ -60,4 +60,4 @@ function playTextToSpeech(text) {
     speechSynthesis.speak(utterance);
 }
 
-//ubuntu
+//wsl2
