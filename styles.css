@@ -4,14 +4,14 @@
     width: 100px;
     height: 150px;
     background-color: rgb(178, 209, 178);;
-}
-
-.container {
+  }
+  
+  .container {
     width: 300px;
     padding: 30px;
-}
-
-.switch {
+  }
+  
+  .switch {
     position: relative;
     display: inline-block;
     width: 60px;
@@ -70,7 +70,7 @@
   .slider.round:before {
     border-radius: 50%;
   }
-
+  
   #playButton {
     width: 60px;
     height: 30px;
