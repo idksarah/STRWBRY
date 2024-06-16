@@ -16,19 +16,30 @@ function checkedboxOn () {
       }
   }
 
+  
+    // pop uo element stuff
+
+    let popUp = document.createElement("div");
+    popUp.classList.add("popUp");
+    let popUpText = document.createElement("p");
+    popUpText.classList = "text popUpText";
+    //
+
   function displayDefinitions(definitions) {
       if (!definitions || definitions.length === 0) {
           return;
       }
 
-      let definitionText = 'Definitions:\n';
+      let popUpText = 'Definitions:\n';
       definitions.forEach((definition, index) => {
           if (definition.shortdef && definition.shortdef.length > 0) {
-              definitionText += `${index + 1}. ${definition.shortdef[0]}\n`;
+            popUpText += `${index + 1}. ${definition.shortdef[0]}\n`;
           }
       });
-      alert(definitionText);
+      alert(popUpText);
   }
+
+        
 
   async function afterSelection(event) {
       let selectedText = getSelectedText().trim().toLowerCase();
@@ -59,7 +70,9 @@ function checkedboxOn () {
   }
 
   document.addEventListener('mouseup', afterSelection);
-  document.addEventListener('keyup', afterSelection);
+
+  
+
 }
 
 let toggleButton = document.querySelector("#toggle");
@@ -78,10 +91,20 @@ function loadCheckboxState() {
 
 window.onload = loadCheckboxState; 
 
+
+//checkedboxOn(); //again for testing purposes; should be witihin the event listener
+
 toggleButton.addEventListener('click', () => {
   saveCheckboxState();
-  if(toggleButton.checked){ 
+  /*if(toggleButton.checked){ 
     checkedboxOn();
-  }
+  } for testing purposes*/ 
 });
 
+document.addEventListener("mouseup", function(event) {
+    var selectedText = window.getSelection().toString().trim();
+    if (selectedText !== "") {
+      chrome.runtime.sendMessage({ action: "showPopup", text: selectedText });
+    }
+  });
+  

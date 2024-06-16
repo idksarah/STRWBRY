@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highlighted Word Overlay</title>
+    <style>
+        /* Overlay styles */
+        body {
+            overflow: hidden; /* Prevent scrolling while overlay is active */
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+            z-index: 9999; /* Ensure it's above other content */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            max-width: 80%;
+            max-height: 80%;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="popup-content">
+            <div id="word"></div>
+            <button id="closeButton">Close</button>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>
