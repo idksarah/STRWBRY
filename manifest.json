@@ -9,7 +9,7 @@
     "content_scripts":[
         {
             "matches":["<all_urls>"],
-            "js": ["content.js"]
+            "js": ["contentScript.js"]
         }
     ],
     "action":{
@@ -19,5 +19,6 @@
     },
     "background": {
         "service_worker": "background.js"
-    }
+    },
+    "action": { }
 }
