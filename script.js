@@ -92,7 +92,7 @@ function loadCheckboxState() {
 window.onload = loadCheckboxState; 
 
 
-//checkedboxOn(); //again for testing purposes; should be witihin the event listener
+checkedboxOn(); //again for testing purposes; should be witihin the event listener
 
 toggleButton.addEventListener('click', () => {
   saveCheckboxState();

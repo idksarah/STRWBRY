@@ -3,7 +3,11 @@
     "version": "1.1.0",
     "description": "Provides the pronunciation and definition of highlighted words",
     "permissions":[
-        "activeTab"
+        "activeTab",
+        "contextMenus",
+        "tabs",
+        "tts",
+        "storage"
     ],
     "manifest_version": 3,
     "content_scripts":[
@@ -19,6 +23,5 @@
     },
     "background": {
         "service_worker": "background.js"
-    },
-    "action": { }
+    }
 }
