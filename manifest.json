@@ -11,7 +11,7 @@
     ],
     "action":{
         "default_popup": "index.html",
-        "default_title": "Reader"
+        "default_title": "STRWBRY"
     },
     "icons": {
       "16": "cake16.png",
