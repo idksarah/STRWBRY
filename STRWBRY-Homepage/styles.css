@@ -1,0 +1,81 @@
+#thankYou {
+    font-size: 40px;
+}
+
+.bigDiv{
+    display: flex;
+    justify-content: center;
+    padding-top: -20px;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(249, 244, 230);
+    border-radius: 15px;
+    margin-top: 30px;
+}
+
+.content {
+    flex-direction: column;
+    padding: 30px;
+}
+
+.text {
+    font-size: 20px;
+}
+
+.strawberryCake {
+  height: 250px;
+  width: auto;
+  margin-top: -30px;
+  margin-left: -20px;
+}
+
+.star {
+  height: 100px;
+  width: auto;
+  margin-top: 120px;
+  margin-left: -50px
+}
+
+.strawberry {
+  height: 300px;
+  width: auto;
+  margin-top: -40px;
+  margin-bottom: -50px;
+}
+
+.top, .middle {
+  display: flex;
+}
+
+.text {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(73,68,68);
+}
+
+#thankYou {
+  color: rgb(183, 37, 26)
+}
+
+.likeActually{
+  margin-top: -20px;
+}
+
+.link {
+  display: inline;
+}
+
+.notes {
+  color: rgb(183, 37, 26);
+  background-color: rgb(239, 224, 181);
+  width: fit-content;
+}
+
+/*.translate{
+  border-radius: 10px;
+  border: none;
+  height: 30px;
+  color: rgb(183, 37, 26);
+  background-color: rgb(243, 225, 174);
+  cursor: pointer;
+}
