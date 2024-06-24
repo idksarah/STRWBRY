@@ -1,10 +1,8 @@
 {
     "name": "STRWBRY: Translations and Pronunciation",
     "version": "1.1.0",
-    "description": "Primarily for students/parents who know Spanish and are learning English. STRWBRY, after the user highlights a word, creates a popup showing that word's spelling, Spanish translation, and pronunciation.",
+    "description": "Primarily for those who know Spanish and are learning English; creates a popup showing a word's Spanish translation + pronunciation.",
     "permissions":[
-        "contextMenus",
-        "tts"
     ],
     "manifest_version": 3,
     "content_scripts":[
