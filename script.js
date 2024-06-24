@@ -1,78 +1,68 @@
-function checkedboxOn () {
-  async function fetchDefinition(word) {
-      const apiKey = 'e9cf6d9e-d14f-4994-b21c-31ac82894fc5';
-      const apiUrl = `https://www.dictionaryapi.com/api/v3/references/spanish/json/${word.toLowerCase()}?key=${apiKey}`;
+async function fetchDefinition(word) {
+  const apiKey = 'e9cf6d9e-d14f-4994-b21c-31ac82894fc5';
+  const apiUrl = `https://www.dictionaryapi.com/api/v3/references/spanish/json/${word.toLowerCase()}?key=${apiKey}`;
 
-      try {
-          const response = await fetch(apiUrl);
-          if (!response.ok) {
-              return;
-          }
-
-          const data = await response.json();
-          return data;
-      } catch (error) {
+  try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
           return null;
       }
+
+      const data = await response.json();
+      return data;
+  } catch (error) {
+      return null;
+  }
+}
+
+function displayDefinitions(definitions) {
+  if (!definitions || definitions.length === 0) {
+      return;
   }
 
-  
-    // pop uo element stuff
-
-    let popUp = document.createElement("div");
-    popUp.classList.add("popUp");
-    let popUpText = document.createElement("p");
-    popUpText.classList = "text popUpText";
-    //
-
-  function displayDefinitions(definitions) {
-      if (!definitions || definitions.length === 0) {
-          return;
+  let popUpText = 'Definitions:\n';
+  definitions.forEach((definition, index) => {
+      if (definition.shortdef && definition.shortdef.length > 0) {
+          popUpText += `${index + 1}. ${definition.shortdef[0]}\n`;
       }
+  });
+  alert(popUpText);
+}
 
-      let popUpText = 'Definitions:\n';
-      definitions.forEach((definition, index) => {
-          if (definition.shortdef && definition.shortdef.length > 0) {
-            popUpText += `${index + 1}. ${definition.shortdef[0]}\n`;
-          }
-      });
-      alert(popUpText);
+async function afterSelection(event) {
+  let selectedText = getSelectedText().trim().toLowerCase();
+  if (selectedText.length === 0) {
+      return;
   }
 
-        
+  console.log('Selected Text:', selectedText);
+  const definitions = await fetchDefinition(selectedText);
+  console.log('Definitions:', definitions);
+  displayDefinitions(definitions);
+  playTextToSpeech(selectedText);
+}
 
-  async function afterSelection(event) {
-      let selectedText = getSelectedText().trim().toLowerCase();
-      if (selectedText.length === 0) {
-          return;
-      }
-
-      console.log('Selected Text:', selectedText);
-      const definitions = await fetchDefinition(selectedText);
-      console.log('Definitions:', definitions); 
-      displayDefinitions(definitions);
-      playTextToSpeech(selectedText);
+function getSelectedText() {
+  let text = "";
+  if (typeof window.getSelection != "undefined") {
+      text = window.getSelection().toString();
+  } else if (typeof document.selection != "undefined" && document.selection.type == "Text") {
+      text = document.selection.createRange().text;
   }
+  return text;
+}
 
-  function getSelectedText() {
-      let text = "";
-      if (typeof window.getSelection != "undefined") {
-          text = window.getSelection().toString();
-      } else if (typeof document.selection != "undefined" && document.selection.type == "Text") {
-          text = document.selection.createRange().text;
-      }
-      return text;
-  }
+function playTextToSpeech(text) {
+  const utterance = new SpeechSynthesisUtterance(text);
+  speechSynthesis.speak(utterance);
+}
 
-  function playTextToSpeech(text) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      speechSynthesis.speak(utterance);
-  }
-
+function enableSelectionHandler() {
   document.addEventListener('mouseup', afterSelection);
+}
 
-  
-
+function disableSelectionHandler() {
+  document.removeEventListener('mouseup', afterSelection);
 }
 
 let toggleButton = document.querySelector("#toggle");
@@ -84,27 +74,26 @@ function saveCheckboxState() {
 
 function loadCheckboxState() {
   let storedState = localStorage.getItem('checkboxState');
-  if(storedState !== null) {
-    toggleButton.checked = JSON.parse(storedState);
+  if (storedState !== null) {
+      toggleButton.checked = JSON.parse(storedState);
   }
 }
 
-window.onload = loadCheckboxState; 
+window.onload = () => {
+  loadCheckboxState();
+  toggleButton.addEventListener('change', toggleEventHandler); // Listen to change event of the toggle
+  toggleEventHandler(); // Call once to initialize based on the current state
+};
 
-
-checkedboxOn(); //again for testing purposes; should be witihin the event listener
+function toggleEventHandler() {
+  if (toggleButton.checked) {
+      enableSelectionHandler();
+  } else {
+      disableSelectionHandler();
+  }
+}
 
 toggleButton.addEventListener('click', () => {
   saveCheckboxState();
-  /*if(toggleButton.checked){ 
-    checkedboxOn();
-  } for testing purposes*/ 
+  toggleEventHandler(); // Call the handler on click to update the event listener
 });
-
-document.addEventListener("mouseup", function(event) {
-    var selectedText = window.getSelection().toString().trim();
-    if (selectedText !== "") {
-      chrome.runtime.sendMessage({ action: "showPopup", text: selectedText });
-    }
-  });
-  

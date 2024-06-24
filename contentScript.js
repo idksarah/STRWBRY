@@ -42,6 +42,7 @@ function displayDefinitions(clientX, clientY, definitions) {
         tooltip = document.createElement('div');
         tooltip.className = 'tooltip';
         tooltip.style.position = 'absolute';
+        tooltip.style.zIndex = '100000';
         tooltip.style.top = `${clientY}px`;
         tooltip.style.left = `${clientX}px`;
         tooltip.style.backgroundColor = 'rgba(365,365,365,0.9)';
@@ -69,6 +70,7 @@ function displayDefinitions(clientX, clientY, definitions) {
         audioButton.style.borderWidth = '0px';
         audioButton.style.width = 'auto';
         audioButton.style.height = '30px';
+        audioButton.style.cursor = 'pointer';
 
         let audioIcon = document.createElement('img');
         audioIcon.src = chrome.runtime.getURL('volumeIcon.png');
