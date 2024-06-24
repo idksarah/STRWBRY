@@ -64,36 +64,3 @@ function enableSelectionHandler() {
 function disableSelectionHandler() {
   document.removeEventListener('mouseup', afterSelection);
 }
-
-let toggleButton = document.querySelector("#toggle");
-
-function saveCheckboxState() {
-  let isChecked = toggleButton.checked;
-  localStorage.setItem('checkboxState', isChecked);
-}
-
-function loadCheckboxState() {
-  let storedState = localStorage.getItem('checkboxState');
-  if (storedState !== null) {
-      toggleButton.checked = JSON.parse(storedState);
-  }
-}
-
-window.onload = () => {
-  loadCheckboxState();
-  toggleButton.addEventListener('change', toggleEventHandler); // Listen to change event of the toggle
-  toggleEventHandler(); // Call once to initialize based on the current state
-};
-
-function toggleEventHandler() {
-  if (toggleButton.checked) {
-      enableSelectionHandler();
-  } else {
-      disableSelectionHandler();
-  }
-}
-
-toggleButton.addEventListener('click', () => {
-  saveCheckboxState();
-  toggleEventHandler(); // Call the handler on click to update the event listener
-});

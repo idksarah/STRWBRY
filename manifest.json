@@ -1,13 +1,10 @@
 {
-    "name": "Pronunciation and Definition",
+    "name": "STRWBRY: Translations and Pronunciation",
     "version": "1.1.0",
-    "description": "Provides the pronunciation and definition of highlighted words",
+    "description": "Primarily for students/parents who know Spanish and are learning English. STRWBRY, after the user highlights a word, creates a popup showing that word's spelling, Spanish translation, and pronunciation.",
     "permissions":[
-        "activeTab",
         "contextMenus",
-        "tabs",
-        "tts",
-        "storage"
+        "tts"
     ],
     "manifest_version": 3,
     "content_scripts":[
@@ -18,8 +15,13 @@
     ],
     "action":{
         "default_popup": "index.html",
-        "default_title": "Reader",
-        "default_icon": "toro.jpg"
+        "default_title": "Reader"
+    },
+    "icons": {
+      "16": "cake16.png",
+      "32": "cake32.png",
+      "48": "cake48.png",
+      "128": "cake128.png"
     },
     "background": {
         "service_worker": "background.js"

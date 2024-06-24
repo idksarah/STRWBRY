@@ -52,7 +52,7 @@ function displayDefinitions(clientX, clientY, definitions) {
 
         let tooltipContent = document.createElement('div');
         tooltipContent.className = 'tooltip-content';
-        tooltipContent.style.color = 'rgb(73,68,68)';
+        tooltipContent.style.color = 'rgb(183, 37, 26)';
 
         definitions.forEach((definition, index) => {
             if (definition.shortdef && definition.shortdef.length > 0) {
@@ -65,7 +65,7 @@ function displayDefinitions(clientX, clientY, definitions) {
 
         let audioButton = document.createElement('button');
         //audioButton.textContent = 'Play Audio';
-        audioButton.style.background = 'rgba(201,100,92,0.7)'
+        audioButton.style.background = 'rgba(183, 37, 26,0.7)'
         audioButton.style.borderRadius = '100%';
         audioButton.style.borderWidth = '0px';
         audioButton.style.width = 'auto';
@@ -88,7 +88,7 @@ function displayDefinitions(clientX, clientY, definitions) {
         let popupHighlightedWord = document.createElement('h3');
         popupHighlightedWord.textContent = highlightedWord.charAt(0).toUpperCase() + highlightedWord.slice(1);
         popupHighlightedWord.style.color = 'rgb(209,115,108)';
-        popupHighlightedWord.style.backgroundColor = 'rgba(240, 227,192,0.7)';
+        popupHighlightedWord.style.backgroundColor = 'rgba(239, 224, 181,0.7)';
         popupHighlightedWord.style.height = '30px';
         popupHighlightedWord.style.margin = '5px';
         popupHighlightedWord.style.display = 'flex';
