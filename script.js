@@ -1,5 +1,5 @@
 async function fetchDefinition(word) {
-  const apiKey = 'e9cf6d9e-d14f-4994-b21c-31ac82894fc5';
+  const apiKey = 'e9cf6d9e-d14f-4994-b21c-31ac82894fc5'; //should convert to a local variable oops
   const apiUrl = `https://www.dictionaryapi.com/api/v3/references/spanish/json/${word.toLowerCase()}?key=${apiKey}`;
 
   try {
