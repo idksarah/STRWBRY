@@ -1,5 +1,4 @@
 chrome.runtime.onInstalled.addListener(function() {
-  // Remove any existing context menu items to avoid duplicates
   chrome.contextMenus.removeAll(function() {
       chrome.contextMenus.create({
           id: "contextMenu1",
@@ -10,7 +9,6 @@ chrome.runtime.onInstalled.addListener(function() {
   });
 });
 
-// Listen for context menu item clicks
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
   if (info.menuItemId === "contextMenu1") {
       console.log("Context menu clicked, sending message to content script with text:", info.selectionText);
@@ -18,7 +16,6 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
   }
 });
 
-// Listen for messages from the extension (popup or other components)
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   console.log("Message received in background script:", request);
   if (request.action === "createDiv") {
