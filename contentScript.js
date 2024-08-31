@@ -1,7 +1,7 @@
 console.log("contentscript.js injected");
 
-let highlightedWord = ''; // Variable to store the highlighted word
-let tooltip = null; // Variable to store the tooltip
+let highlightedWord = '';
+let tooltip = null;
 
 async function fetchDefinition(word) {
     const apiKey = 'e9cf6d9e-d14f-4994-b21c-31ac82894fc5';
@@ -21,7 +21,7 @@ async function fetchDefinition(word) {
 }
 
 async function afterSelection(event) {
-    highlightedWord = getSelectedText().trim().toLowerCase(); // Store the highlighted word
+    highlightedWord = getSelectedText().trim().toLowerCase();
     if (highlightedWord.length === 0) {
         return;
     }
@@ -37,7 +37,6 @@ function displayDefinitions(clientX, clientY, definitions) {
         return;
     }
 
-    // Create tooltip only if it doesn't exist
     if (!tooltip) {
         tooltip = document.createElement('div');
         tooltip.className = 'tooltip';
@@ -64,7 +63,6 @@ function displayDefinitions(clientX, clientY, definitions) {
         
 
         let audioButton = document.createElement('button');
-        //audioButton.textContent = 'Play Audio';
         audioButton.style.background = 'rgba(183, 37, 26,0.7)'
         audioButton.style.borderRadius = '100%';
         audioButton.style.borderWidth = '0px';
@@ -81,7 +79,7 @@ function displayDefinitions(clientX, clientY, definitions) {
         audioButton.appendChild(audioIcon);
 
         audioButton.addEventListener('click', (event) => {
-            event.stopPropagation(); // Prevent the click from triggering the tooltip close logic
+            event.stopPropagation();
             playTextToSpeech(highlightedWord);
         });
 
@@ -109,12 +107,11 @@ function displayDefinitions(clientX, clientY, definitions) {
         tooltip.appendChild(tooltipContent);
         document.body.appendChild(tooltip);
 
-        // Close tooltip when clicking outside
         document.addEventListener('click', function closeTooltip(event) {
             if (!tooltip.contains(event.target)) {
                 document.removeEventListener('click', closeTooltip);
                 tooltip.remove();
-                tooltip = null; // Reset the tooltip variable
+                tooltip = null;
             }
         });
     }
@@ -137,7 +134,6 @@ function getSelectedText() {
 
 document.addEventListener('mouseup', afterSelection);
 
-// Listen for messages from background script
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     console.log("Message received in content script:", request);
     if (request.action === "playTextToSpeech") {
